@@ -112,12 +112,30 @@ def relier_salles(coord_salle, dico_salles):
         chemins.append((dico_salles[coord_salle].get_portes()[-1], dico_salles[coord_salle_voisine].get_portes()[-1]))
     return dico_salles, chemins
 
+def check_connection(dico_salles):
+    L = {}
+    i = 0
+    for x in dico_salles.keys() :
+        L[x] = i
+        i += 1
+    for x in dico_salles.keys() :
+        voisins = dico_salles[x].get_voisins()
+        for y in voisins :
+            if L[y] < L[x] :
+                L[y] = L[x]
+            else :
+                L[x] = L[y]
+
+            
+    return True
+
+
+
 
 
 def generer_salles():
     dico_salle = {}
     liste_coord_salle = []
-    check_connection = []
     liste_coord_chemin = []
     dico_chemin = {}
     for i in range(NB_SALLES//4):
