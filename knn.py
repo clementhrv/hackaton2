@@ -4,7 +4,6 @@ def dist(a,b):
 
 
 def knn(a,L):
-    xa, ya = a
     b_min = L[0]
     dist_min = dist(a, L[0])
     for x in L[1:]:
