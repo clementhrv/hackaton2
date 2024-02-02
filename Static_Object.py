@@ -185,6 +185,11 @@ def set_map(dico_salle, dico_chemin):
             else:
                 for i in range(min(x1, x2), max(x1, x2)+1):
                     map[i][y2] = 1
+    for i in range(MAP_SIZE):
+        map[i][0] = 0
+        map[i][MAP_SIZE-1] = 0
+        map[0][i] = 0
+        map[MAP_SIZE-1][i] = 0
     return map
 
 dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
