@@ -33,7 +33,7 @@ class Salle :
         self.dimension = hauteur, largeur
         self.portes = []
         self.voisins = [] #position des voisins
-        self.nb_voisins = rd.randint(1,2)
+        self.nb_voisins = rd.randint(1, 3)
         self.sommets = []
         
 
@@ -119,9 +119,30 @@ def generer_salles():
     liste_coord_salle = []
     liste_coord_chemin = []
     dico_chemin = {}
-    for i in range(NB_SALLES):
-        X_pos = rd.randint(0, MAP_SIZE - SIZE_MAX_SALLE)
-        Y_pos = rd.randint(0, MAP_SIZE - SIZE_MAX_SALLE)
+    for i in range(NB_SALLES//4):
+        X_pos = rd.randint(0, (MAP_SIZE)//2)
+        Y_pos = rd.randint((MAP_SIZE)//2, MAP_SIZE - SIZE_MAX_SALLE)
+        hauteur = rd.randint(SIZE_MIN_SALLE, SIZE_MAX_SALLE)
+        largeur = rd.randint(SIZE_MIN_SALLE, SIZE_MAX_SALLE)
+        liste_coord_salle.append((X_pos,Y_pos))
+        dico_salle[(X_pos, Y_pos)] = Salle((X_pos, Y_pos), hauteur, largeur)
+    for i in range(NB_SALLES//4):
+        X_pos = rd.randint((MAP_SIZE)//2, MAP_SIZE - SIZE_MAX_SALLE)
+        Y_pos = rd.randint(0, (MAP_SIZE)//2)
+        hauteur = rd.randint(SIZE_MIN_SALLE, SIZE_MAX_SALLE)
+        largeur = rd.randint(SIZE_MIN_SALLE, SIZE_MAX_SALLE)
+        liste_coord_salle.append((X_pos,Y_pos))
+        dico_salle[(X_pos, Y_pos)] = Salle((X_pos, Y_pos), hauteur, largeur)
+    for i in range(NB_SALLES//4):
+        X_pos = rd.randint(0, (MAP_SIZE)//2)
+        Y_pos = rd.randint(0, (MAP_SIZE)//2)
+        hauteur = rd.randint(SIZE_MIN_SALLE, SIZE_MAX_SALLE)
+        largeur = rd.randint(SIZE_MIN_SALLE, SIZE_MAX_SALLE)
+        liste_coord_salle.append((X_pos,Y_pos))
+        dico_salle[(X_pos, Y_pos)] = Salle((X_pos, Y_pos), hauteur, largeur)
+    for i in range(NB_SALLES//4):
+        X_pos = rd.randint((MAP_SIZE)//2, MAP_SIZE - SIZE_MAX_SALLE)
+        Y_pos = rd.randint((MAP_SIZE)//2, MAP_SIZE - SIZE_MAX_SALLE)
         hauteur = rd.randint(SIZE_MIN_SALLE, SIZE_MAX_SALLE)
         largeur = rd.randint(SIZE_MIN_SALLE, SIZE_MAX_SALLE)
         liste_coord_salle.append((X_pos,Y_pos))
