@@ -227,32 +227,24 @@ def mask_mur(map):
                 
     return mask
                 
+
 def generate_all():
     dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
 
-<<<<<<< HEAD
     temp = set_map(dico_salle, dico_chemin)
-    return mask_mur(temp)
-=======
-def generate_all():
-    dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
-    # while not check_connection(dico_salle):
-    #     dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
-    #     print(check_connection(dico_salle))
-    temp = set_map(dico_salle, dico_chemin)
-
+    """
     plt.imshow(temp, cmap='hot')
     plt.show()
 
     plt.imshow(mask_mur(temp), cmap='hot')
-    plt.show()
+    plt.show()"""
 
     return mask_mur(temp)
 
 
 
-generate_all()
->>>>>>> 2a7b4b677fb3efdfad40318fe81dc596257f6196
+
+
 
 
 
