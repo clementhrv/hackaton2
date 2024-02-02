@@ -170,8 +170,8 @@ def set_map(dico_salle, dico_chemin):
     map = np.zeros((MAP_SIZE, MAP_SIZE))
     for x in dico_salle.keys():
         piece = dico_salle[x]
-        for i in range(piece.sommets[0][0], piece.sommets[2][0]):
-            for j in range(piece.sommets[0][1], piece.sommets[2][1]):
+        for i in range(piece.sommets[0][0], piece.sommets[2][0]+1):
+            for j in range(piece.sommets[0][1], piece.sommets[2][1]+1):
                 map[i][j] = 1
     for x in dico_chemin.keys():
         points = dico_chemin[x].get_listepoints()
@@ -185,6 +185,11 @@ def set_map(dico_salle, dico_chemin):
             else:
                 for i in range(min(x1, x2), max(x1, x2)+1):
                     map[i][y2] = 1
+    for i in range(MAP_SIZE):
+        map[i][0] = 0
+        map[i][MAP_SIZE-1] = 0
+        map[0][i] = 0
+        map[MAP_SIZE-1][i] = 0
     return map
 
 dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
