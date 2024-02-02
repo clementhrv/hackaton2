@@ -3,7 +3,7 @@ import pygame
 
 
 
-class Coin():
+class CoinMap():
 
     def __init__(self, init_map):
         self.init_map = init_map
@@ -17,4 +17,8 @@ class Coin():
         self.map = total_map
 
 
-    def 
+
+
+
+    #def render():
+
