@@ -3,8 +3,9 @@ import time
 import numpy as np
 import math
 from skimage.draw import line
-class Character:
 
+
+class Protagonist:
 
     def __init__(self, position):
         self.pos = position

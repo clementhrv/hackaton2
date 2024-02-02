@@ -2,7 +2,8 @@ import pygame
 import timeit
 import numpy as np
 
-from character import Character
+from character import Protagonist
+from antagonist import Antagonist
 from coin import Mapfinale   #no
 
 
@@ -15,11 +16,13 @@ init_map[40]=[1]*64 #no
 init_map[50]=[1]*64 #no
 
 t = timeit.default_timer()
-a = Character((100, 100))
+a = Protagonist((100, 100))
+b = Antagonist((100, 50))
 
 map = Mapfinale(init_map) #no
 mappiece = map.coin_generation(init_map) #no
 finalmap = map.coeur_generation(mappiece) #no
+
 
 running = True
 while running :
@@ -31,6 +34,8 @@ while running :
     key = pygame.key.get_pressed()
     a.update(key, delta,finalmap)
     a.render(screen)
+    b.update(a.pos, delta)
+    b.render(screen)
     pygame.display.flip()
 
     for event in pygame.event.get():
