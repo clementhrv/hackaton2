@@ -118,16 +118,19 @@ def check_connection(dico_salles):
     for x in dico_salles.keys() :
         L[x] = i
         i += 1
+    for z in dico_salles.keys():
+        for x in dico_salles.keys() :
+            voisins = dico_salles[x].get_voisins()
+            for y in voisins :
+                if L[y] < L[x] :
+                    L[y] = L[x]
+                else :
+                    L[x] = L[y]
     for x in dico_salles.keys() :
-        voisins = dico_salles[x].get_voisins()
-        for y in voisins :
-            if L[y] < L[x] :
-                L[y] = L[x]
-            else :
-                L[x] = L[y]
-
-            
+        if L[x] != 0 :
+            return False
     return True
+
 
 
 
