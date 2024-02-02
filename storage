@@ -1,0 +1,4 @@
+                l = len(rx)
+                for i in range(1, l - 1):
+                    pygame.draw.rect(screen, (100, 255, 0), ((rx[i])*8,(ry[i])*8, 8, 8))
+                pygame.draw.rect(screen, (0,0, 255), ((x)*8,(y)*8, 8, 8))
