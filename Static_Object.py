@@ -3,7 +3,7 @@ import numpy as np
 import knn
 import random as rd
 import matplotlib.pyplot as plt
-NB_SALLES = 8
+NB_SALLES = 12
 MAP_SIZE = 64
 SIZE_MAX_SALLE = 16
 SIZE_MIN_SALLE = 5
@@ -117,6 +117,7 @@ def relier_salles(coord_salle, dico_salles):
 def generer_salles():
     dico_salle = {}
     liste_coord_salle = []
+    check_connection = []
     liste_coord_chemin = []
     dico_chemin = {}
     for i in range(NB_SALLES//4):
@@ -170,8 +171,8 @@ def set_map(dico_salle, dico_chemin):
     map = np.zeros((MAP_SIZE, MAP_SIZE))
     for x in dico_salle.keys():
         piece = dico_salle[x]
-        for i in range(piece.sommets[0][0], piece.sommets[2][0]+1):
-            for j in range(piece.sommets[0][1], piece.sommets[2][1]+1):
+        for i in range(piece.sommets[0][0], piece.sommets[2][0]):
+            for j in range(piece.sommets[0][1], piece.sommets[2][1]):
                 map[i][j] = 1
     for x in dico_chemin.keys():
         points = dico_chemin[x].get_listepoints()
@@ -196,7 +197,22 @@ dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles(
 
 temp = set_map(dico_salle, dico_chemin)
 
+def mask_mur(map):
+    mask = np.zeros((MAP_SIZE, MAP_SIZE))
+    for i in range(MAP_SIZE):
+        for j in range(MAP_SIZE):
+            if map[i][j] == 0:
+                if (i-1 > 0 and map[i-1][j] == 1) or (i+1 < MAP_SIZE and map[i+1][j] == 1) or (j-1 > 0 and map[i][j-1] == 1) or (j+1 < MAP_SIZE and map[i][j-1] == 1) or ((i-1 > 0) and (j-1 > 0) and (map[i-1][j-1] == 1)) or ((i+1 < MAP_SIZE) and (j-1 > 0) and (map[i+1][j-1] == 1)) or ((i+1 < MAP_SIZE) and (j+1 < MAP_SIZE) and (map[i+1][j+1] == 1)) or ((i-1 > 0)  and (j+1 < MAP_SIZE) and (map[i-1][j+1] == 1)) :
+                    mask[i][j] = 1
+                
+    return mask
+                
+
+
 plt.imshow(temp, cmap='hot')
+plt.show()
+
+plt.imshow(mask_mur(temp), cmap='hot')
 plt.show()
 
 
