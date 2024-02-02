@@ -233,18 +233,14 @@ def generate_all():
         dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
     temp = set_map(dico_salle, dico_chemin)
 
-
-    temp = set_map(dico_salle, dico_chemin)
-    """
     plt.imshow(temp, cmap='hot')
     plt.show()
 
+
     plt.imshow(mask_mur(temp), cmap='hot')
-    plt.show()"""
+    plt.show()
 
     return mask_mur(temp)
-
-
 
 
 
