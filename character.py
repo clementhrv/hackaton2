@@ -2,8 +2,9 @@ import pygame
 import time
 import numpy as np
 from skimage.draw import line
-class Character:
 
+
+class Protagonist:
 
     def __init__(self, position):
         self.pos = position
