@@ -1,5 +1,7 @@
 import pygame
 import time
+import numpy as np
+from skimage.draw import line
 class Character:
 
 
@@ -9,6 +11,7 @@ class Character:
         print(self.sheet.get_width())
         self.Sprites = {}
         self.dir = "up"
+        self.health = 100
 
 
         dir = ["up", "down", "left", "right"]
@@ -35,9 +38,15 @@ class Character:
         if map[x+dx, y+dy] == 1:
             return False
 
+
+
+
+
+
+
     def animate(self):
-        
-        if self.ticks == 5000:
+
+        if self.ticks > 800:
             self.state = not self.state
             self.ticks = 0
         self.sprite = self.Sprites[self.dir][int(self.state)]
@@ -72,6 +81,37 @@ class Character:
         if key[pygame.K_a]:
             print(px, py)
         self.pos = (x, y)
+
+
+
+
+    def visible(self, coords, map):
+        x,y = self.get_map_pos()
+        rr, cc = line(coords[0], coords[1], x, y)
+        l = len(rr)
+        for i in range(1, l-1) :
+            if map[rr[i], cc[i]] == 0:
+                return False, 0, 0
+        return True, rr, cc
+
+    def render_light(self, screen, map):
+
+        Wx, Wy = np.where(map == 0)[0:2]
+        for i in range(len((Wx))):
+            x = Wx[i]
+            y = Wy[i]
+            bool, rx, ry = self.visible((x,y), map)
+            if bool:
+                l = len(rx)
+                for i in range(1, l - 1):
+                    pygame.draw.rect(screen, (100, 255, 0), ((rx[i])*8,(ry[i])*8, 8, 8))
+                pygame.draw.rect(screen, (0,0, 255), ((x)*8,(y)*8, 8, 8))
+
+
+
+
+
+        return Wx
 
 
 
