@@ -214,9 +214,6 @@ def set_map(dico_salle, dico_chemin):
         map[MAP_SIZE-1][i] = 0
     return map
 
-dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
-
-temp = set_map(dico_salle, dico_chemin)
 
 def mask_mur(map):
     mask = np.zeros((MAP_SIZE, MAP_SIZE))
@@ -225,16 +222,32 @@ def mask_mur(map):
             if map[i][j] == 0:
                 if (i-1 > 0 and map[i-1][j] == 1) or (i+1 < MAP_SIZE and map[i+1][j] == 1) or (j-1 > 0 and map[i][j-1] == 1) or (j+1 < MAP_SIZE and map[i][j-1] == 1) or ((i-1 > 0) and (j-1 > 0) and (map[i-1][j-1] == 1)) or ((i+1 < MAP_SIZE) and (j-1 > 0) and (map[i+1][j-1] == 1)) or ((i+1 < MAP_SIZE) and (j+1 < MAP_SIZE) and (map[i+1][j+1] == 1)) or ((i-1 > 0)  and (j+1 < MAP_SIZE) and (map[i-1][j+1] == 1)) :
                     mask[i][j] = 1
+                else :
+                    mask[i][j] = 9
                 
     return mask
                 
 
+def generate_all():
+    dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
+    # while not check_connection(dico_salle):
+    #     dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
+    #     print(check_connection(dico_salle))
+    temp = set_map(dico_salle, dico_chemin)
 
-plt.imshow(temp, cmap='hot')
-plt.show()
+    plt.imshow(temp, cmap='hot')
+    plt.show()
 
-plt.imshow(mask_mur(temp), cmap='hot')
-plt.show()
+    plt.imshow(mask_mur(temp), cmap='hot')
+    plt.show()
+
+    return mask_mur(temp)
+
+
+
+generate_all()
+
+
 
 
 
