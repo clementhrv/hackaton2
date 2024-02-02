@@ -1,6 +1,7 @@
 import pygame
 import timeit
-from character import Character
+from character import Protagonist
+from antagonist import Antagonist
 
 
 dim = (512, 512)
@@ -8,7 +9,8 @@ screen = pygame.display.set_mode(dim)
 
 
 t = timeit.default_timer()
-a = Character((100, 100))
+a = Protagonist((100, 100))
+b = Antagonist((100, 50))
 
 running = True
 while running :
@@ -17,6 +19,8 @@ while running :
     key = pygame.key.get_pressed()
     a.update(key, delta)
     a.render(screen)
+    b.update(a.pos, delta)
+    b.render(screen)
     pygame.display.flip()
 
     for event in pygame.event.get():

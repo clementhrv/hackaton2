@@ -1,11 +1,11 @@
 import pygame
 import time
-class Character:
 
+class Protagonist:
 
     def __init__(self, position):
         self.pos = position
-        self.sheet = pygame.image.load("8596005_orig.gif")
+        self.sheet = pygame.image.load("images/protagonist.gif")
         print(self.sheet.get_width())
         self.Sprites = {}
         dir = ["up", "down", "left", "right"]
