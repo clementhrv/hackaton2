@@ -1,6 +1,14 @@
 import numpy as np 
 import matplotlib.pyplot as pyplot
+import pygame
 
 
-class DynamicObject :
+class Hero:
+    def __init__():
+
+        
+
+    def deplacement():
+
+
     
