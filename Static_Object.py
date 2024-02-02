@@ -170,8 +170,8 @@ def set_map(dico_salle, dico_chemin):
     map = np.zeros((MAP_SIZE, MAP_SIZE))
     for x in dico_salle.keys():
         piece = dico_salle[x]
-        for i in range(piece.sommets[0][0], piece.sommets[2][0]):
-            for j in range(piece.sommets[0][1], piece.sommets[2][1]):
+        for i in range(piece.sommets[0][0], piece.sommets[2][0]+1):
+            for j in range(piece.sommets[0][1], piece.sommets[2][1]+1):
                 map[i][j] = 1
     for x in dico_chemin.keys():
         points = dico_chemin[x].get_listepoints()
