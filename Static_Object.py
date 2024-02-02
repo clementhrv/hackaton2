@@ -216,12 +216,12 @@ def set_map(dico_salle, dico_chemin):
 
 
 def mask_mur(map):
-    mask = np.zeros((MAP_SIZE, MAP_SIZE))
+    mask = np.ones((MAP_SIZE, MAP_SIZE))
     for i in range(MAP_SIZE):
         for j in range(MAP_SIZE):
             if map[i][j] == 0:
                 if (i-1 > 0 and map[i-1][j] == 1) or (i+1 < MAP_SIZE and map[i+1][j] == 1) or (j-1 > 0 and map[i][j-1] == 1) or (j+1 < MAP_SIZE and map[i][j-1] == 1) or ((i-1 > 0) and (j-1 > 0) and (map[i-1][j-1] == 1)) or ((i+1 < MAP_SIZE) and (j-1 > 0) and (map[i+1][j-1] == 1)) or ((i+1 < MAP_SIZE) and (j+1 < MAP_SIZE) and (map[i+1][j+1] == 1)) or ((i-1 > 0)  and (j+1 < MAP_SIZE) and (map[i-1][j+1] == 1)) :
-                    mask[i][j] = 1
+                    mask[i][j] = 0
                 else :
                     mask[i][j] = 9
                 
