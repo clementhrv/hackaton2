@@ -229,12 +229,10 @@ def mask_mur(map):
 
 def generate_all():
     dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
-<<<<<<< HEAD
-=======
     while not check_connection(dico_salle):
         dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
     temp = set_map(dico_salle, dico_chemin)
->>>>>>> 4940e8a70cc146add24ab3f8c168f6a0b42167b9
+
 
     temp = set_map(dico_salle, dico_chemin)
     """
