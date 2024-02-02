@@ -225,7 +225,11 @@ def mask_mur(map):
                 
     return mask
                 
+def generate_all():
+    dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
 
+    temp = set_map(dico_salle, dico_chemin)
+    return mask_mur(temp)
 
 plt.imshow(temp, cmap='hot')
 plt.show()
