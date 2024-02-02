@@ -112,21 +112,21 @@ def relier_salles(coord_salle, dico_salles):
         chemins.append((dico_salles[coord_salle].get_portes()[-1], dico_salles[coord_salle_voisine].get_portes()[-1]))
     return dico_salles, chemins
 
-def check_connection(dico_salles):
+def check_connection(dico_salle):
     L = {}
     i = 0
-    for x in dico_salles.keys() :
+    for x in dico_salle.keys() :
         L[x] = i
         i += 1
-    for z in dico_salles.keys():
-        for x in dico_salles.keys() :
-            voisins = dico_salles[x].get_voisins()
+    for z in dico_salle.keys():
+        for x in dico_salle.keys() :
+            voisins = dico_salle[x].get_voisins()
             for y in voisins :
-                if L[y] < L[x] :
+                if L[y] <= L[x] :
                     L[y] = L[x]
                 else :
                     L[x] = L[y]
-    for x in dico_salles.keys() :
+    for x in dico_salle.keys() :
         if L[x] != 0 :
             return False
     return True
@@ -230,6 +230,13 @@ def mask_mur(map):
 
 def generate_all():
     dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
+<<<<<<< HEAD
+=======
+    while not check_connection(dico_salle):
+        dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
+        print(check_connection(dico_salle))
+    temp = set_map(dico_salle, dico_chemin)
+>>>>>>> 4940e8a70cc146add24ab3f8c168f6a0b42167b9
 
     temp = set_map(dico_salle, dico_chemin)
     """
