@@ -5,7 +5,7 @@ import random as rd
 import matplotlib.pyplot as plt
 NB_SALLES = 12
 MAP_SIZE = 64
-SIZE_MAX_SALLE = 16
+SIZE_MAX_SALLE = 14
 SIZE_MIN_SALLE = 5
 
 
@@ -127,7 +127,7 @@ def check_connection(dico_salle):
                 else :
                     L[x] = L[y]
     for x in dico_salle.keys() :
-        if L[x] != 0 :
+        if L[x] != 0 and L[x] != NB_SALLES-1:
             return False
     return True
 
@@ -197,7 +197,6 @@ def set_map(dico_salle, dico_chemin):
                 map[i][j] = 1
     for x in dico_chemin.keys():
         points = dico_chemin[x].get_listepoints()
-        print(points)
         for j in range(len(points)-1):
             x1, y1 = points[j]
             x2, y2 = points[j+1]
@@ -232,7 +231,6 @@ def generate_all():
     dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
     while not check_connection(dico_salle):
         dico_salle, dico_chemin, liste_coord_salle, liste_coord_chemin = generer_salles()
-        print(check_connection(dico_salle))
     temp = set_map(dico_salle, dico_chemin)
 
     plt.imshow(temp, cmap='hot')
