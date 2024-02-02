@@ -14,6 +14,7 @@ class Protagonist:
         self.Sprites = {}
         self.dir = "up"
         self.health = 100
+        self.speed = 1000000
 
 
         dir = ["up", "down", "left", "right"]
@@ -22,9 +23,11 @@ class Protagonist:
         crops = [[(-70, -8), (-99, -8)], [(-73, -280), (-43, -280)],[(-38, -109), (-68, -109)], [(-262, -110), (-292, -110)]]
         for i in range(4):
             for j in range(2):
-                surf = pygame.Surface((30, 30))
+                surf = pygame.Surface((30, 30), pygame.SRCALPHA, 32)
+                surf = surf.convert_alpha()
                 surf.blit(self.sheet, crops[i][j])
                 self.Sprites[dir[i]].append(surf)
+
 
         self.ticks = 0
         self.state = False
@@ -62,22 +65,22 @@ class Protagonist:
         px,py = self.get_map_pos()
         x, y = self.pos
         if key[pygame.K_LEFT] and map[px-1, py] != 0:
-            x -= 100000*t
+            x -= self.speed*t
             self.dir = "left"
             self.ticks += 1
         self.pos = (x, y)
         if key[pygame.K_RIGHT] and map[px+1, py] != 0:
-            x += 100000*t
+            x += self.speed*t
             self.dir = "right"
             self.ticks += 1
         self.pos = (x, y)
         if key[pygame.K_UP] and map[px, py-1] != 0:
-            y -= 100000*t
+            y -= self.speed*t
             self.dir = "up"
             self.ticks += 1
         self.pos = (x, y)
         if key[pygame.K_DOWN] and map[px, py+1] != 0:
-            y += 100000*t
+            y += self.speed*t
             self.dir = "down"
             self.ticks += 1
         if key[pygame.K_a]:
@@ -109,13 +112,17 @@ class Protagonist:
                 bool, rx, ry = self.visible((x,y), map)
                 if bool:
                     Walls.append([x*8,y*8])
+                    l = len(rx)
+                    for i in range(1, l - 1):
+                        pygame.draw.rect(screen, (100, 255, 0), ((rx[i]) * 8, (ry[i]) * 8, 8, 8))
+                    pygame.draw.rect(screen, (0, 0, 255), ((x) * 8, (y) * 8, 8, 8))
 
-
+        """
         lowest = min(Walls, key=lambda x: (x[1], x[0]))
         vertices = sorted(Walls, key=lambda x: math.atan2(x[1] - lowest[1], x[0] - lowest[0]) + 2 * math.pi)
         pygame.draw.polygon(screen, (100, 255, 0), vertices)
         for x,y in Walls:
-            pygame.draw.rect(screen, (0, 0, 255), ((x), (y), 8, 8))
+            pygame.draw.rect(screen, (0, 0, 255), ((x), (y), 8, 8))"""
         """l = len(rx)
                 for i in range(1, l - 1):
                     pygame.draw.rect(screen, (100, 255, 0), ((rx[i])*8,(ry[i])*8, 8, 8))
